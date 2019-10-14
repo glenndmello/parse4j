@@ -18,7 +18,7 @@ public class Parse4JTestCase {
 	@BeforeClass
 	public static void setupParse() {
 		System.out.println("setupParse(): initializing...");
-		Parse.initialize(APP_ID, APP_REST_API_ID);
+		Parse.initialize(APP_ID, APP_REST_API_ID, "localhost");
 	}
 	
 	@AfterClass

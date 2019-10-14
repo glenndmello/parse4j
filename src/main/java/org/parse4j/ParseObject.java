@@ -171,7 +171,7 @@ public class ParseObject {
 		}
 		Object value = this.data.get(key);
 		if (!(value instanceof Number)) {
-			LOGGER.error("Called getParseFile(\"{}\") but the value is a {}", key, value.getClass());
+			LOGGER.error("Called getNumber(\"{}\") but the value is a {}", key, value.getClass());
 			return null;
 		}
 		return (Number) value;
@@ -241,7 +241,7 @@ public class ParseObject {
 		}
 		Object value = this.data.get(key);
 		if (!(value instanceof ParseObject)) {
-			LOGGER.error("Called getParseObject(\"{}\") but the value is a {}", key, value.getClass());
+			LOGGER.error("Called getParseObject(\"{}\") on [{}] but the value is a {}", key, this.className, value.getClass());
 			return null;
 		}
         return (T) value;

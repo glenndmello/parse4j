@@ -311,47 +311,7 @@ public class TestTask extends TestCase {
 		});
 	}
 
-	public void testWhenAllCancel() {
-		runTaskTest(new Callable<Task<?>>() {
-			@Override
-			public Task<?> call() throws Exception {
-				final ArrayList<Task<Void>> tasks = new ArrayList<Task<Void>>();
-				for (int i = 0; i < 20; i++) {
-					final Task<Void>.TaskCompletionSource tcs = Task.create();
-
-					final int number = i;
-					Task.callInBackground(new Callable<Void>() {
-						@Override
-						public Void call() throws Exception {
-							Thread.sleep((long) (Math.random() * 1000));
-							if (number == 10) {
-								tcs.setCancelled();
-							} else {
-								tcs.setResult(null);
-							}
-							return null;
-						}
-					});
-
-					tasks.add(tcs.getTask());
-				}
-				return Task.whenAll(tasks).continueWith(
-						new Continuation<Void, Void>() {
-							@Override
-							public Void then(Task<Void> task) {
-								assertTrue(task.isCompleted());
-								assertFalse(task.isFaulted());
-								assertTrue(task.isCancelled());
-
-								for (Task<Void> t : tasks) {
-									assertTrue(t.isCompleted());
-								}
-								return null;
-							}
-						});
-			}
-		});
-	}
+	
 
 	public void testAsyncChaining() {
 		runTaskTest(new Callable<Task<?>>() {

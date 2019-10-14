@@ -1,14 +1,19 @@
 package org.parse4j;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.SimpleTimeZone;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.parse4j.operation.ParseFieldOperations;
 import org.parse4j.util.ParseRegistry;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 public class Parse {
 
@@ -18,7 +23,6 @@ public class Parse {
 	private static final DateFormat dateFormat;
 	private static boolean isRootMode;
 	private static String sServerPath;
-	private static boolean bCustomServer;
 
 	static {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -28,19 +32,11 @@ public class Parse {
 		ParseFieldOperations.registerDefaultDecoders();
 	}
 
-	static public void initialize(String applicationId, String restAPIKey) {
-		mApplicationId = applicationId;
-		mRestAPIKey = restAPIKey;
-		isRootMode = false;
-		bCustomServer = false;
-	}
-
 	static public void initialize(String applicationId, String restAPIKey, String serverPath) {
 		mApplicationId = applicationId;
 		mRestAPIKey = restAPIKey;
 		isRootMode = false;
 		sServerPath = serverPath;
-		bCustomServer = true;
 	}
 
 	/**
@@ -50,9 +46,10 @@ public class Parse {
 	 * @param applicationId your app id
 	 * @param masterKey your master key
 	 */
-	static public void initializeAsRoot (String applicationId, String masterKey) {
+	static public void initializeAsRoot (String applicationId, String masterKey, String serverPath) {
 		mApplicationId = applicationId;
 		mMasterKey = masterKey;
+	    sServerPath = serverPath;
 		isRootMode = true;
 	}
 
@@ -69,12 +66,7 @@ public class Parse {
 	}
 
 	static public String getParseAPIUrl(String context) {
-		if(bCustomServer){
-			return sServerPath + "/" + context;
-		}else{
-			return ParseConstants.API_ENDPOINT + "/" + ParseConstants.API_VERSION
-					+ "/" + context;
-		}
+		return sServerPath + "/" + context;
 	}
 
 	public static synchronized String encodeDate(Date date) {

@@ -6,46 +6,14 @@
 	<version>1.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>parse4j</name>
-	<url>https://github.com/thiagolocatelli/parse4j</url>
 
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
 
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<id>parse4j</id>
-			<name>Thiago Locatelli</name>
-			<email>thiago.locatelli@gmail.com</email>
-		</developer>
-	</developers>
-
-	<contributors>
-		<!-- <contributor> <name>Contributor's name</name> <email>Contributor's 
-			email</email> </contributor> -->
-	</contributors>
-
-	<scm>
-		<connection>scm:git:git@github.com:thiagolocatelli/parse4j.git</connection>
-		<developerConnection>scm:git:git@github.com:thiagolocatelli/parse4j.git</developerConnection>
-		<url>git@github.com:thiagolocatelli/parse4j.git</url>
-	</scm>
 
 	<properties>
 		<maven.test.skip>true</maven.test.skip>
 		<maven.test.failure.ignore>false</maven.test.failure.ignore>
 		<maven.test.error.ignore>false</maven.test.error.ignore>
-		<java.version>1.6</java.version>
+		<java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -56,7 +24,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
+			<version>1.7.25</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>		
@@ -121,8 +89,8 @@
 					<version>3.1</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>1.8</source>
+						<target>1.8</target>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -130,44 +98,4 @@
 	</build>
 
 
-	<profiles>
-		<profile>
-			<id>release-sign-artifacts</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-compiler-plugin</artifactId>
-							<version>3.1</version>
-							<configuration>
-								<encoding>UTF-8</encoding>
-								<source>1.6</source>
-								<target>1.6</target>
-							</configuration>
-						</plugin>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-gpg-plugin</artifactId>
-							<executions>
-								<execution>
-									<id>sign-artifacts</id>
-									<phase>verify</phase>
-									<goals>
-										<goal>sign</goal>
-									</goals>
-								</execution>
-							</executions>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-	</profiles>
 </project>

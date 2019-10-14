@@ -14,11 +14,15 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class ParseBatch {
-	private static final String path = "/" + ParseConstants.API_VERSION + "/"+ "classes" + "/";
+	private static final String path = "/parse/classes/";
 	private JSONArray data = new JSONArray();
 
 	private static Logger LOGGER = LoggerFactory.getLogger(ParseBatch.class);
 
+	public int count() {
+	    return data.length();
+	}
+	
 	public void deleteObject(ParseObject obj) {
 		if (obj.getObjectId() == null)
 			throw new IllegalArgumentException("for delete operation your object should provide objectId");
